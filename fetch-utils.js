@@ -32,3 +32,7 @@ export async function signOutUser() {
 export async function createItem(item, quantity) {
     return await client.from('lists').insert([{ item, quantity }]);
 }
+
+export async function getList() {
+    return await client.from('lists').select('*');
+}
