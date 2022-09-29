@@ -20,7 +20,13 @@ addItemForm.addEventListener('submit', async (e) => {
 
     await createItem(item, quantity);
 
-    displayList();
+    if (error) {
+        displayError();
+    } else {
+        lists.push(item);
+        addItemForm.reset();
+        displayList();
+    }
 });
 
 window.addEventListener('load', async () => {
