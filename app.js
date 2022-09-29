@@ -6,6 +6,7 @@ import { createItem, getList } from './fetch-utils.js';
 /* Get DOM Elements */
 const addItemForm = document.getElementById('item-form');
 const errorMessage = document.getElementById('error-display');
+const groceryList = document.getElementById('list');
 /* State */
 let lists = [];
 let error = null;
@@ -19,9 +20,7 @@ addItemForm.addEventListener('submit', async (e) => {
 
     await createItem(item, quantity);
 
-    console.log(item, quantity);
-
-    // displayList()
+    displayList();
 });
 
 window.addEventListener('load', async () => {
@@ -33,7 +32,7 @@ window.addEventListener('load', async () => {
     if (error) {
         displayError();
     } else {
-        // displayList()
+        displayList();
     }
 });
 
@@ -44,5 +43,24 @@ function displayError() {
         errorMessage.textContent = error.message;
     } else {
         errorMessage.textContent = null;
+    }
+}
+
+function renderList(item) {
+    const li = document.createElement('li');
+    const p = document.createElement('p');
+    p.textContent = `${item.quantity} - ${item.item}`;
+
+    li.append(p);
+
+    return li;
+}
+
+function displayList() {
+    groceryList.innerHTML = '';
+
+    for (const list of lists) {
+        const listEl = renderList(list);
+        groceryList.append(listEl);
     }
 }
