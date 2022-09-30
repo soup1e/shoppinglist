@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,700;1,200;1,600&display=swap');
 :root {
     --background: rgb(224, 234, 247);
     --header-background: white;
@@ -68,4 +69,67 @@ main {
 
 .hidden {
     display: none;
+}
+
+section {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    align-items: center;
+}
+
+button {
+    box-shadow: inset 0px 0px 0px 0px #f29c93;
+    background-color: #fe1a00;
+    border-radius: 10px;
+    border: 2px solid #d83526;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 4px 20px;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: bold;
+    font-style: italic;
+}
+button:hover {
+    background-color: #ce0100;
+}
+button:active {
+    position: relative;
+    top: 1px;
+}
+
+#addItem {
+    background-color: #09ff00;
+    border: 2px solid #3acc2d;
+}
+#addItem:hover {
+    background-color: #20be00;
+}
+
+p {
+    font-family: 'Inter Tight', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    padding: 20px;
+}
+
+#list {
+    padding: 10px 100px;
+    background-color: whitesmoke;
+    -webkit-box-shadow: 1px 4px 15px -3px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 1px 4px 15px -3px rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 4px 15px -3px rgba(0, 0, 0, 0.7);
+}
+ul {
+    display: flex;
+    flex-flow: column wrap;
+}
+.bought {
+    text-decoration: line-through;
+    order: 1000;
 }

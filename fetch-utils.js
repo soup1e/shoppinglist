@@ -1,5 +1,6 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://xxfqouzpwreesvccncir.supabase.co';
+const SUPABASE_KEY =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4ZnFvdXpwd3JlZXN2Y2NuY2lyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQ0NzIyNTQsImV4cCI6MTk4MDA0ODI1NH0.wk5foxl8CMfmEIag85DJUhaO5NiRscSPTbZZEVhc-sM';
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* Auth related functions */
@@ -27,3 +28,24 @@ export async function signOutUser() {
 }
 
 /* Data functions */
+
+export async function createItem(item, quantity) {
+    return await client.from('lists').insert([{ item, quantity }]);
+}
+
+export async function getList() {
+    return await client.from('lists').select();
+}
+
+export async function completeList(id) {
+    return await client.from('lists').update({ bought: true }).eq('id', id);
+}
+export async function deleteAllList() {
+    const user = getUser();
+    await client.from('lists').delete().eq('user_id', user.id);
+}
+
+export async function deleteAllBought() {
+    const user = getUser();
+    await client.from('lists').delete().eq('user_id', user.id).match({ bought: true });
+}
