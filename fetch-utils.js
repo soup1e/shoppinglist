@@ -40,3 +40,7 @@ export async function getList() {
 export async function completeList(id) {
     return await client.from('lists').update({ bought: true }).eq('id', id);
 }
+export async function deleteAllList() {
+    const user = getUser();
+    await client.from('lists').delete().eq('user_id', user.id);
+}

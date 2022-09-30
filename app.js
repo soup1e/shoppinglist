@@ -2,11 +2,13 @@
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
 
-import { createItem, getList, completeList } from './fetch-utils.js';
+import { createItem, getList, completeList, deleteAllList } from './fetch-utils.js';
 /* Get DOM Elements */
 const addItemForm = document.getElementById('item-form');
 const errorMessage = document.getElementById('error-display');
 const groceryList = document.getElementById('list');
+const removeAllButton = document.getElementById('deleteall');
+const removeCompleteButton = document.getElementById('deletepurchased');
 /* State */
 let lists = [];
 let error = null;
@@ -84,3 +86,8 @@ async function displayList() {
         });
     }
 }
+
+removeAllButton.addEventListener('click', async () => {
+    await deleteAllList();
+    displayList();
+});
