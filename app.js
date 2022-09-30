@@ -11,6 +11,7 @@ const groceryList = document.getElementById('list');
 let lists = [];
 let error = null;
 /* Events */
+
 async function fetchData() {
     const response = await getList();
 
@@ -60,6 +61,10 @@ function renderList(item) {
     const p = document.createElement('p');
     p.textContent = `${item.quantity} - ${item.item}`;
 
+    if (item.bought) {
+        li.classList.add('bought');
+    }
+
     li.append(p);
 
     return li;
@@ -72,5 +77,10 @@ async function displayList() {
     for (const item of lists) {
         const listEl = renderList(item);
         groceryList.append(listEl);
+
+        listEl.addEventListener('click', async () => {
+            await completeList(item.id);
+            displayList();
+        });
     }
 }
