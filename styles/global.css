@@ -125,7 +125,11 @@ form {
     -moz-box-shadow: 1px 4px 15px -3px rgba(0, 0, 0, 0.7);
     box-shadow: 1px 4px 15px -3px rgba(0, 0, 0, 0.7);
 }
-
+ul {
+    display: flex;
+    flex-flow: column wrap;
+}
 .bought {
     text-decoration: line-through;
+    order: 1000;
 }
