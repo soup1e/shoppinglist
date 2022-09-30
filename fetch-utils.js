@@ -34,5 +34,9 @@ export async function createItem(item, quantity) {
 }
 
 export async function getList() {
-    return await client.from('lists').select('*');
+    return await client.from('lists').select();
+}
+
+export async function completeList(id) {
+    return await client.from('lists').update({ bought: true }).eq('id', id);
 }

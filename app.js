@@ -2,7 +2,7 @@
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
 
-import { createItem, getList } from './fetch-utils.js';
+import { createItem, getList, completeList } from './fetch-utils.js';
 /* Get DOM Elements */
 const addItemForm = document.getElementById('item-form');
 const errorMessage = document.getElementById('error-display');
@@ -11,6 +11,13 @@ const groceryList = document.getElementById('list');
 let lists = [];
 let error = null;
 /* Events */
+async function fetchData() {
+    const response = await getList();
+
+    error = response.error;
+    lists = response.data;
+}
+
 addItemForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addItemForm);
@@ -30,11 +37,7 @@ addItemForm.addEventListener('submit', async (e) => {
 });
 
 window.addEventListener('load', async () => {
-    const response = await getList();
-
-    error = response.error;
-    lists = response.data;
-
+    await fetchData();
     if (error) {
         displayError();
     } else {
@@ -62,11 +65,12 @@ function renderList(item) {
     return li;
 }
 
-function displayList() {
+async function displayList() {
+    await fetchData();
     groceryList.innerHTML = '';
 
-    for (const list of lists) {
-        const listEl = renderList(list);
+    for (const item of lists) {
+        const listEl = renderList(item);
         groceryList.append(listEl);
     }
 }
